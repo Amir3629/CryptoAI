@@ -5,6 +5,10 @@ env/
 ENV/
 .venv/
 
+# Environment variables
+.env
+.env.*
+
 # Python cache files
 __pycache__/
 *.py[cod]
@@ -85,7 +89,3 @@ celerybeat-schedule/
 
 # SageMath parsed files
 *.sage.py
-
-# Environment variables
-.env
-.env.*
