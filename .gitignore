@@ -1,6 +1,7 @@
 # Virtual Environments
-Venv/
+.venv/
 crypto_bot_env/
+crypto_env/
 
 # Python cache files
 __pycache__/
@@ -9,9 +10,23 @@ __pycache__/
 # Environment Variables
 .env
 
+# Logs
+*.log
+
+# Databases
+*.db
+*.sqlite3
+
+# Compiled Python files
+*.pyo
+*.pyd
+
 # IDEs and Editors
 .vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
