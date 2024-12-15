@@ -1,6 +1,3 @@
----
-# config.local.yaml
-
-model:
-  retrain: true  # Override to retrain the model
-  # Add other overrides if necessary
+trading:
+  coins: ["DOGE", "ADA", "XRP"]
+  trade_amount: 0.002

@@ -1,19 +1,17 @@
 # CryptoAI Trading Bot
-
-A simulated crypto trading bot using Python.
-
+ 
+## Overview
+CryptoAI is a cryptocurrency trading bot that uses machine learning to make trading decisions based on market data and technical indicators.
+ 
 ## Features
-
-- Fetches market data from CryptoCompare (simulated or real APIs)
-- Applies technical indicators for analysis
-- Trains a Random Forest model to predict future prices
-- Executes buy/sell trades based on model predictions
-- Connects to PostgreSQL or MySQL databases to store data
-- Logs all activities for monitoring and debugging
-
+- Fetches real-time market data from CryptoCompare and CoinGecko.
+- Utilizes technical indicators like SMA, EMA, RSI, MACD, Bollinger Bands, and StochRSI.
+- Implements a machine learning model (Random Forest Regressor) for price prediction.
+- Places buy/sell orders on the MEXC exchange based on signals.
+- Comprehensive logging and error handling.
+ 
 ## Setup Instructions
-
 1. **Clone the Repository:**
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/yourusername/CryptoAI.git
    cd CryptoAI

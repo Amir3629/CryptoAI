@@ -1,22 +1,17 @@
----
-# config.yaml
+settings:
+  use_local_config: false  # Set to true if you have 'config.local.yaml' for overrides
 
-# API Configuration
-api:
-  data_source: simulated  # Options: 'simulated', 'cryptocompare', 'coingecko'
-  # If using another API, add relevant keys here
-
-# Trading Configuration
 trading:
   coins: ["BTC", "ETH", "BNB"]
   dynamic_coins: true
-  base_symbol: "USDT"
+  base_symbol: "USDT"  # Ensures trading pairs like 'BTC/USDT'
   buy_threshold: 1.005
   sell_threshold: 0.995
   trade_amount: 0.001
   max_daily_trades: 10
+  timeframe: "1H"  # Timeframe for candlestick data
+  lookback: 200    # Number of data points to fetch
 
-# Machine Learning Configuration
 model:
   test_size: 0.2
   param_grid:
@@ -24,22 +19,29 @@ model:
     max_depth: [None, 10, 20]
     min_samples_split: [2, 5, 10]
     min_samples_leaf: [1, 2, 4]
-  retrain: false
+  retrain: true
+  model_path: "models/trading_model.pkl"
 
-# Execution Settings
 execution:
-  loop_interval: 60  # in seconds
+  loop_interval: 60  # Time in seconds between each bot cycle
 
-# Database Configuration
 database:
-  primary: "postgresql"  # Options: 'postgresql', 'mysql'
-  secondary: "mysql"
+  primary: "postgresql"  # Primary database type: "postgresql" or "mysql"
+  secondary: "mysql"     # Secondary database type
 
-# Logging Configuration
 logging:
-  level: INFO
-  file: logs\crypto_ai.log
+  file: "logs/crypto_ai.log"
+  level: "INFO"
 
-# Other Settings
-settings:
-  use_local_config: true
+api:
+  data_source: "cryptocompare"  # Options: "cryptocompare", "coingecko", "simulated"
+
+crawling:
+  enabled: false
+  websites:
+    - name: "Crypto News Site"
+      url: "https://www.coindesk.com/"
+      parse_function: "parse_crypto_news"
+    - name: "Crypto Data Site"
+      url: "https://coinmarketcap.com/"
+      parse_function: "parse_another_crypto_site"

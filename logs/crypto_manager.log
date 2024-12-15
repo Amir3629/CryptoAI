@@ -1,0 +1,6 @@
+2024-12-15 01:46:28,365 [INFO] Initialized new ML model.
+2024-12-15 01:46:28,365 [INFO] Starting Trading Bot...
+2024-12-15 01:46:28,366 [INFO] Generating simulated market data.
+2024-12-15 01:46:28,555 [INFO] Trained and saved ML model.
+2024-12-15 01:46:28,564 [INFO] Signal: -1, Current Price: 90.13636304439463
+2024-12-15 01:46:28,564 [INFO] Sleeping for 3600 seconds...

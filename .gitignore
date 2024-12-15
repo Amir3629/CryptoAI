@@ -1,36 +1,6 @@
-# .gitignore
-
-# Configuration Files
-config.local.yaml
-.env
-
-# Python Bytecode
+venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Virtual Environments
-.venv/
-venv/
-.crypto_env/
-
-# Logs
-logs/*.log
-
-# Databases
-data/*.db
-data/*.sqlite3
-
-# IDEs and Editors
-.vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-
-# Jupyter Notebook Checkpoints
-.ipynb_checkpoints/
-
-# Models
-models/trading_model.pkl
+.env
