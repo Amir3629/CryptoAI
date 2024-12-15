@@ -1,3 +1,5 @@
+# crypto_bot.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -41,7 +43,10 @@ def get_config_value(key_path, default=None):
         else:
             env_val = os.getenv(key_path.upper().replace('.', '_'))
             if env_val is not None:
-                return type(default)(env_val) if default is not None else env_val
+                try:
+                    return type(default)(env_val) if default is not None else env_val
+                except ValueError:
+                    return env_val
             return default
     return current
 
@@ -88,7 +93,7 @@ PRIMARY_DB = get_config_value("database.primary", "postgresql")
 SECONDARY_DB = get_config_value("database.secondary", "mysql")
 
 # Logging Setup
-logging.basicConfig(filename='crypto_ai.log',
+logging.basicConfig(filename='logs\crypto_ai.log',
                     level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 logging.info("Crypto AI Program started.")

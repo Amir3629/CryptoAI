@@ -1,37 +1,45 @@
-# API Keys
-COINGECKO_API_KEY=CG-upLd8zxY3DyS9dh9UPHdcXfC
-CRYPTOCOMPARE_API_KEY=d88e584967965d0d3289bbc458102d2a376bc571599ed8dc9800379caf83bd25
-ALPHA_VANTAGE_API_KEY=GPKT0JJXA2H2NYZ3
-AYRSHARE_API_KEY=E7194A40-FA13436E-A1CAB950-79C7D8A8
-FINANCIAL_MODELING_PREP_API_KEY=y7LYfIA3zETN67BA0Mh5nnNauKOq6hkk
+---
+# config.yaml
 
-# MEXC Exchange API Keys
-MEXC_API_KEY=mx0vglm2SP3ID1Zy54
-MEXC_API_SECRET=719170135d25479b80fa8dca20395d5f
+# API Configuration
+api:
+  data_source: simulated  # Options: 'simulated', 'cryptocompare', 'coingecko'
+  # If using another API, add relevant keys here
 
-# Telegram Bot Credentials
-TELEGRAM_API_TOKEN=7616006839:AAGCl3XL9wSb5o4dY8EEHy2Kz4zkXpbfthA
-CHAT_ID=67646679
+# Trading Configuration
+trading:
+  coins: ["BTC", "ETH", "BNB"]
+  dynamic_coins: true
+  base_symbol: "USDT"
+  buy_threshold: 1.005
+  sell_threshold: 0.995
+  trade_amount: 0.001
+  max_daily_trades: 10
 
-# Email Configuration
-SENDER_EMAIL=iramir2020@yahoo.com
-SENDER_PASSWORD=Hemwak8e!
-RECIPIENT_EMAIL=iramir2020@yahoo.com
+# Machine Learning Configuration
+model:
+  test_size: 0.2
+  param_grid:
+    n_estimators: [50, 100, 200]
+    max_depth: [None, 10, 20]
+    min_samples_split: [2, 5, 10]
+    min_samples_leaf: [1, 2, 4]
+  retrain: false
 
-# Database Configuration (PostgreSQL)
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=Hemwak8e!
-POSTGRES_DATABASE=crypto_ai_db
+# Execution Settings
+execution:
+  loop_interval: 60  # in seconds
 
-# Database Configuration (MySQL)
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=Hemwak8e!
-MYSQL_DATABASE=crypto_ai_db
+# Database Configuration
+database:
+  primary: "postgresql"  # Options: 'postgresql', 'mysql'
+  secondary: "mysql"
 
-# Elastic Cloud Configuration
-ELASTIC_CLOUD_URL="https://d53af8d03f9a4f008ea4e5c4c40ea3a2"
-ELASTIC_PASSWORD=Hemwak8e!
+# Logging Configuration
+logging:
+  level: INFO
+  file: logs\crypto_ai.log
+
+# Other Settings
+settings:
+  use_local_config: true

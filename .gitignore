@@ -1,25 +1,26 @@
-# Virtual Environments
-.venv/
-crypto_bot_env/
-crypto_env/
+# .gitignore
 
-# Python cache files
-__pycache__/
-*.pyc
-
-# Environment Variables
+# Configuration Files
+config.local.yaml
 .env
 
-# Logs
-*.log
-
-# Databases
-*.db
-*.sqlite3
-
-# Compiled Python files
+# Python Bytecode
+__pycache__/
+*.pyc
 *.pyo
 *.pyd
+
+# Virtual Environments
+.venv/
+venv/
+.crypto_env/
+
+# Logs
+logs/*.log
+
+# Databases
+data/*.db
+data/*.sqlite3
 
 # IDEs and Editors
 .vscode/
@@ -30,3 +31,6 @@ __pycache__/
 
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints/
+
+# Models
+models/trading_model.pkl
