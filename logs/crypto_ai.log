@@ -8177,3 +8177,1101 @@ dtype: object
 2024-12-15 06:00:22,973 - INFO - Target data type: float64
 2024-12-15 06:00:26,241 - INFO - Trained and saved ML model.
 2024-12-15 06:00:26,671 - INFO - Crypto Bot stopped manually.
+2024-12-16 01:14:17,755 - INFO - Crypto AI Program started.
+2024-12-16 01:14:17,758 - INFO - Starting the Crypto Bot Execution.
+2024-12-16 01:14:22,985 - INFO - Fetched 3694 supported symbols.
+2024-12-16 01:14:22,985 - INFO - Sample supported symbols: ['TRUMP1/USDT', 'BDC/USDT', 'AES/USDT', 'NCDT/USDT', 'ALEPH/USDT', 'ORNJ/USDT', 'OGN/USDT', 'HC/USDT', 'HAM/USDT', 'AI16ZELIZA/USDT']...
+2024-12-16 01:14:23,247 - WARNING - Symbol USDT/USDT not supported by exchange. Skipping.
+2024-12-16 01:14:23,312 - INFO - Dynamic coin list: ['BTC/USDT', 'ETH/USDT', 'XRP/USDT', 'SOL/USDT', 'BNB/USDT', 'DOGE/USDT', 'USDC/USDT', 'ADA/USDT', 'STETH/USDT']
+2024-12-16 01:14:23,409 - INFO - Loaded existing ML model.
+2024-12-16 01:14:23,426 - INFO - Running Trading Bot for BTC/USDT...
+2024-12-16 01:14:25,192 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:25,193 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:25,197 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:25,197 - INFO - Target data type: float64
+2024-12-16 01:14:25,617 - INFO - Trained and saved ML model.
+2024-12-16 01:14:25,625 - INFO - Signal (Predicted Change): 0.9960477176060815, Current Price: 104506.5
+2024-12-16 01:14:25,625 - INFO - No actionable signal for BTC/USDT.
+2024-12-16 01:14:25,946 - INFO - Loaded existing ML model.
+2024-12-16 01:14:25,954 - INFO - Running Trading Bot for ETH/USDT...
+2024-12-16 01:14:26,208 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:26,208 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:26,212 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:26,213 - INFO - Target data type: float64
+2024-12-16 01:14:26,657 - INFO - Trained and saved ML model.
+2024-12-16 01:14:26,669 - INFO - Signal (Predicted Change): 0.98881894657067, Current Price: 3958.5
+2024-12-16 01:14:26,670 - INFO - No open position to SELL for ETH/USDT.
+2024-12-16 01:14:26,995 - INFO - Loaded existing ML model.
+2024-12-16 01:14:27,002 - INFO - Running Trading Bot for XRP/USDT...
+2024-12-16 01:14:27,306 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:27,308 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:27,315 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:27,316 - INFO - Target data type: float64
+2024-12-16 01:14:27,839 - INFO - Trained and saved ML model.
+2024-12-16 01:14:27,859 - INFO - Signal (Predicted Change): 0.9876957585644374, Current Price: 2.452
+2024-12-16 01:14:27,860 - INFO - No open position to SELL for XRP/USDT.
+2024-12-16 01:14:28,173 - INFO - Loaded existing ML model.
+2024-12-16 01:14:28,196 - INFO - Running Trading Bot for SOL/USDT...
+2024-12-16 01:14:29,691 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:29,692 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:29,695 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:29,696 - INFO - Target data type: float64
+2024-12-16 01:14:30,091 - INFO - Trained and saved ML model.
+2024-12-16 01:14:30,105 - INFO - Signal (Predicted Change): 0.9984527796383135, Current Price: 223.95
+2024-12-16 01:14:30,106 - INFO - No actionable signal for SOL/USDT.
+2024-12-16 01:14:30,422 - INFO - Loaded existing ML model.
+2024-12-16 01:14:30,527 - INFO - Running Trading Bot for BNB/USDT...
+2024-12-16 01:14:30,864 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:30,865 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:30,869 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:30,870 - INFO - Target data type: float64
+2024-12-16 01:14:31,272 - INFO - Trained and saved ML model.
+2024-12-16 01:14:31,278 - INFO - Signal (Predicted Change): 1.0003046687144708, Current Price: 719.47
+2024-12-16 01:14:31,279 - INFO - No actionable signal for BNB/USDT.
+2024-12-16 01:14:31,603 - INFO - Loaded existing ML model.
+2024-12-16 01:14:31,614 - INFO - Running Trading Bot for DOGE/USDT...
+2024-12-16 01:14:31,934 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:31,934 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:31,938 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:31,938 - INFO - Target data type: float64
+2024-12-16 01:14:32,481 - INFO - Trained and saved ML model.
+2024-12-16 01:14:32,494 - INFO - Signal (Predicted Change): 1.0017441574415742, Current Price: 0.4065
+2024-12-16 01:14:32,494 - INFO - No actionable signal for DOGE/USDT.
+2024-12-16 01:14:32,820 - INFO - Loaded existing ML model.
+2024-12-16 01:14:32,827 - INFO - Running Trading Bot for USDC/USDT...
+2024-12-16 01:14:33,670 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:33,670 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:33,675 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:33,676 - INFO - Target data type: float64
+2024-12-16 01:14:34,067 - INFO - Trained and saved ML model.
+2024-12-16 01:14:34,074 - INFO - Signal (Predicted Change): 1.0, Current Price: 1.0
+2024-12-16 01:14:34,074 - INFO - No actionable signal for USDC/USDT.
+2024-12-16 01:14:34,400 - INFO - Loaded existing ML model.
+2024-12-16 01:14:34,410 - INFO - Running Trading Bot for ADA/USDT...
+2024-12-16 01:14:38,285 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:55,321 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:55,329 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:55,330 - INFO - Target data type: float64
+2024-12-16 01:14:55,785 - INFO - Trained and saved ML model.
+2024-12-16 01:14:55,792 - INFO - Signal (Predicted Change): 0.9931805682859757, Current Price: 1.091
+2024-12-16 01:14:55,793 - INFO - No open position to SELL for ADA/USDT.
+2024-12-16 01:14:56,097 - INFO - Loaded existing ML model.
+2024-12-16 01:14:56,117 - INFO - Running Trading Bot for STETH/USDT...
+2024-12-16 01:14:56,405 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:56,406 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:14:56,416 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:14:56,417 - INFO - Target data type: float64
+2024-12-16 01:14:57,022 - INFO - Trained and saved ML model.
+2024-12-16 01:14:57,033 - INFO - Signal (Predicted Change): 0.9892685560804861, Current Price: 3953.96
+2024-12-16 01:14:57,034 - INFO - No open position to SELL for STETH/USDT.
+2024-12-16 01:14:57,299 - INFO - Crypto Bot execution completed for this cycle.
+2024-12-16 01:14:57,299 - INFO - Sleeping for 60 seconds before next cycle.
+2024-12-16 01:16:10,530 - INFO - Fetched 3694 supported symbols.
+2024-12-16 01:16:10,531 - INFO - Sample supported symbols: ['TRUMP1/USDT', 'BDC/USDT', 'AES/USDT', 'NCDT/USDT', 'ALEPH/USDT', 'ORNJ/USDT', 'OGN/USDT', 'HC/USDT', 'HAM/USDT', 'AI16ZELIZA/USDT']...
+2024-12-16 01:16:10,789 - WARNING - Symbol USDT/USDT not supported by exchange. Skipping.
+2024-12-16 01:16:10,969 - INFO - Dynamic coin list: ['BTC/USDT', 'ETH/USDT', 'XRP/USDT', 'SOL/USDT', 'BNB/USDT', 'DOGE/USDT', 'USDC/USDT', 'ADA/USDT', 'STETH/USDT']
+2024-12-16 01:16:11,303 - INFO - Loaded existing ML model.
+2024-12-16 01:16:11,373 - INFO - Running Trading Bot for BTC/USDT...
+2024-12-16 01:16:11,715 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:11,734 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:11,815 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:11,819 - INFO - Target data type: float64
+2024-12-16 01:16:12,937 - INFO - Trained and saved ML model.
+2024-12-16 01:16:12,967 - INFO - Signal (Predicted Change): 0.9963208950609419, Current Price: 104473.78
+2024-12-16 01:16:12,969 - INFO - No actionable signal for BTC/USDT.
+2024-12-16 01:16:13,368 - INFO - Loaded existing ML model.
+2024-12-16 01:16:13,495 - INFO - Running Trading Bot for ETH/USDT...
+2024-12-16 01:16:14,118 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:14,122 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:14,132 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:14,133 - INFO - Target data type: float64
+2024-12-16 01:16:15,152 - INFO - Trained and saved ML model.
+2024-12-16 01:16:15,166 - INFO - Signal (Predicted Change): 0.990879198109034, Current Price: 3955.65
+2024-12-16 01:16:15,167 - INFO - No open position to SELL for ETH/USDT.
+2024-12-16 01:16:15,675 - INFO - Loaded existing ML model.
+2024-12-16 01:16:15,731 - INFO - Running Trading Bot for XRP/USDT...
+2024-12-16 01:16:16,132 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:16,138 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:16,148 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:16,149 - INFO - Target data type: float64
+2024-12-16 01:16:17,064 - INFO - Trained and saved ML model.
+2024-12-16 01:16:17,098 - INFO - Signal (Predicted Change): 0.987951020408163, Current Price: 2.45
+2024-12-16 01:16:17,103 - INFO - No open position to SELL for XRP/USDT.
+2024-12-16 01:16:17,455 - INFO - Loaded existing ML model.
+2024-12-16 01:16:17,492 - INFO - Running Trading Bot for SOL/USDT...
+2024-12-16 01:16:17,894 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:17,898 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:17,906 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:17,908 - INFO - Target data type: float64
+2024-12-16 01:16:18,710 - INFO - Trained and saved ML model.
+2024-12-16 01:16:18,734 - INFO - Signal (Predicted Change): 1.0002908977166105, Current Price: 223.79
+2024-12-16 01:16:18,736 - INFO - No actionable signal for SOL/USDT.
+2024-12-16 01:16:19,122 - INFO - Loaded existing ML model.
+2024-12-16 01:16:19,166 - INFO - Running Trading Bot for BNB/USDT...
+2024-12-16 01:16:19,773 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:19,775 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:19,780 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:19,783 - INFO - Target data type: float64
+2024-12-16 01:16:20,779 - INFO - Trained and saved ML model.
+2024-12-16 01:16:20,827 - INFO - Signal (Predicted Change): 0.9998334468712203, Current Price: 719.29
+2024-12-16 01:16:20,848 - INFO - No actionable signal for BNB/USDT.
+2024-12-16 01:16:21,204 - INFO - Loaded existing ML model.
+2024-12-16 01:16:21,241 - INFO - Running Trading Bot for DOGE/USDT...
+2024-12-16 01:16:21,574 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:21,577 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:21,591 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:21,594 - INFO - Target data type: float64
+2024-12-16 01:16:22,577 - INFO - Trained and saved ML model.
+2024-12-16 01:16:22,708 - INFO - Signal (Predicted Change): 1.0002362204724409, Current Price: 0.4064
+2024-12-16 01:16:22,779 - INFO - No actionable signal for DOGE/USDT.
+2024-12-16 01:16:23,242 - INFO - Loaded existing ML model.
+2024-12-16 01:16:23,321 - INFO - Running Trading Bot for USDC/USDT...
+2024-12-16 01:16:23,612 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:23,616 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:23,620 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:23,622 - INFO - Target data type: float64
+2024-12-16 01:16:24,307 - INFO - Trained and saved ML model.
+2024-12-16 01:16:24,315 - INFO - Signal (Predicted Change): 1.0, Current Price: 1.0
+2024-12-16 01:16:24,316 - INFO - No actionable signal for USDC/USDT.
+2024-12-16 01:16:24,670 - INFO - Loaded existing ML model.
+2024-12-16 01:16:24,693 - INFO - Running Trading Bot for ADA/USDT...
+2024-12-16 01:16:25,062 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:25,063 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:25,075 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:25,076 - INFO - Target data type: float64
+2024-12-16 01:16:26,208 - INFO - Trained and saved ML model.
+2024-12-16 01:16:26,235 - INFO - Signal (Predicted Change): 0.9912293577981643, Current Price: 1.09
+2024-12-16 01:16:26,239 - INFO - No open position to SELL for ADA/USDT.
+2024-12-16 01:16:26,637 - INFO - Loaded existing ML model.
+2024-12-16 01:16:26,652 - INFO - Running Trading Bot for STETH/USDT...
+2024-12-16 01:16:27,034 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:27,043 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:16:27,064 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:16:27,067 - INFO - Target data type: float64
+2024-12-16 01:16:27,901 - INFO - Trained and saved ML model.
+2024-12-16 01:16:27,914 - INFO - Signal (Predicted Change): 0.9900902068379012, Current Price: 3950.92
+2024-12-16 01:16:27,916 - INFO - No open position to SELL for STETH/USDT.
+2024-12-16 01:16:28,183 - INFO - Crypto Bot execution completed for this cycle.
+2024-12-16 01:16:28,184 - INFO - Sleeping for 60 seconds before next cycle.
+2024-12-16 01:17:33,311 - INFO - Fetched 3694 supported symbols.
+2024-12-16 01:17:33,312 - INFO - Sample supported symbols: ['TRUMP1/USDT', 'BDC/USDT', 'AES/USDT', 'NCDT/USDT', 'ALEPH/USDT', 'ORNJ/USDT', 'OGN/USDT', 'HC/USDT', 'HAM/USDT', 'AI16ZELIZA/USDT']...
+2024-12-16 01:17:33,570 - WARNING - Symbol USDT/USDT not supported by exchange. Skipping.
+2024-12-16 01:17:33,612 - INFO - Dynamic coin list: ['BTC/USDT', 'ETH/USDT', 'XRP/USDT', 'SOL/USDT', 'BNB/USDT', 'DOGE/USDT', 'USDC/USDT', 'ADA/USDT', 'STETH/USDT']
+2024-12-16 01:17:33,659 - INFO - Loaded existing ML model.
+2024-12-16 01:17:33,665 - INFO - Running Trading Bot for BTC/USDT...
+2024-12-16 01:17:33,916 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:33,917 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:33,921 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:33,922 - INFO - Target data type: float64
+2024-12-16 01:17:34,368 - INFO - Trained and saved ML model.
+2024-12-16 01:17:34,376 - INFO - Signal (Predicted Change): 0.9947688267054569, Current Price: 104678.83
+2024-12-16 01:17:34,376 - INFO - No open position to SELL for BTC/USDT.
+2024-12-16 01:17:34,694 - INFO - Loaded existing ML model.
+2024-12-16 01:17:34,711 - INFO - Running Trading Bot for ETH/USDT...
+2024-12-16 01:17:36,060 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:36,061 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:36,064 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:36,065 - INFO - Target data type: float64
+2024-12-16 01:17:36,770 - INFO - Trained and saved ML model.
+2024-12-16 01:17:36,776 - INFO - Signal (Predicted Change): 0.9882278503362232, Current Price: 3964.62
+2024-12-16 01:17:36,777 - INFO - No open position to SELL for ETH/USDT.
+2024-12-16 01:17:37,097 - INFO - Loaded existing ML model.
+2024-12-16 01:17:37,115 - INFO - Running Trading Bot for XRP/USDT...
+2024-12-16 01:17:37,392 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:37,393 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:37,397 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:37,398 - INFO - Target data type: float64
+2024-12-16 01:17:38,033 - INFO - Trained and saved ML model.
+2024-12-16 01:17:38,046 - INFO - Signal (Predicted Change): 0.9973056573056561, Current Price: 2.457
+2024-12-16 01:17:38,047 - INFO - No actionable signal for XRP/USDT.
+2024-12-16 01:17:38,415 - INFO - Loaded existing ML model.
+2024-12-16 01:17:38,423 - INFO - Running Trading Bot for SOL/USDT...
+2024-12-16 01:17:41,262 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:41,262 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:41,268 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:41,270 - INFO - Target data type: float64
+2024-12-16 01:17:41,689 - INFO - Trained and saved ML model.
+2024-12-16 01:17:41,695 - INFO - Signal (Predicted Change): 0.998486739469578, Current Price: 224.35
+2024-12-16 01:17:41,696 - INFO - No actionable signal for SOL/USDT.
+2024-12-16 01:17:42,033 - INFO - Loaded existing ML model.
+2024-12-16 01:17:42,040 - INFO - Running Trading Bot for BNB/USDT...
+2024-12-16 01:17:51,150 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:51,150 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:51,154 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:51,154 - INFO - Target data type: float64
+2024-12-16 01:17:51,719 - INFO - Trained and saved ML model.
+2024-12-16 01:17:51,804 - INFO - Signal (Predicted Change): 0.9967181499299844, Current Price: 721.27
+2024-12-16 01:17:51,943 - INFO - No actionable signal for BNB/USDT.
+2024-12-16 01:17:52,430 - INFO - Loaded existing ML model.
+2024-12-16 01:17:52,498 - INFO - Running Trading Bot for DOGE/USDT...
+2024-12-16 01:17:52,787 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:52,788 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:52,792 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:52,793 - INFO - Target data type: float64
+2024-12-16 01:17:53,266 - INFO - Trained and saved ML model.
+2024-12-16 01:17:53,275 - INFO - Signal (Predicted Change): 0.9990014720314028, Current Price: 0.4076
+2024-12-16 01:17:53,277 - INFO - No actionable signal for DOGE/USDT.
+2024-12-16 01:17:53,652 - INFO - Loaded existing ML model.
+2024-12-16 01:17:53,664 - INFO - Running Trading Bot for USDC/USDT...
+2024-12-16 01:17:54,034 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:54,035 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:54,051 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:54,081 - INFO - Target data type: float64
+2024-12-16 01:17:54,742 - INFO - Trained and saved ML model.
+2024-12-16 01:17:54,747 - INFO - Signal (Predicted Change): 1.0, Current Price: 1.0
+2024-12-16 01:17:54,748 - INFO - No actionable signal for USDC/USDT.
+2024-12-16 01:17:55,062 - INFO - Loaded existing ML model.
+2024-12-16 01:17:55,070 - INFO - Running Trading Bot for ADA/USDT...
+2024-12-16 01:17:55,366 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:55,366 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:55,373 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:55,374 - INFO - Target data type: float64
+2024-12-16 01:17:55,923 - INFO - Trained and saved ML model.
+2024-12-16 01:17:55,955 - INFO - Signal (Predicted Change): 0.9911506849315065, Current Price: 1.095
+2024-12-16 01:17:55,956 - INFO - No open position to SELL for ADA/USDT.
+2024-12-16 01:17:56,336 - INFO - Loaded existing ML model.
+2024-12-16 01:17:56,358 - INFO - Running Trading Bot for STETH/USDT...
+2024-12-16 01:17:56,644 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:56,645 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:17:56,649 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:17:56,650 - INFO - Target data type: float64
+2024-12-16 01:17:57,308 - INFO - Trained and saved ML model.
+2024-12-16 01:17:57,315 - INFO - Signal (Predicted Change): 0.9886102599984339, Current Price: 3958.87
+2024-12-16 01:17:57,315 - INFO - No open position to SELL for STETH/USDT.
+2024-12-16 01:17:57,575 - INFO - Crypto Bot execution completed for this cycle.
+2024-12-16 01:17:57,576 - INFO - Sleeping for 60 seconds before next cycle.
+2024-12-16 01:19:01,449 - INFO - Fetched 3694 supported symbols.
+2024-12-16 01:19:01,449 - INFO - Sample supported symbols: ['TRUMP1/USDT', 'BDC/USDT', 'AES/USDT', 'NCDT/USDT', 'ALEPH/USDT', 'ORNJ/USDT', 'OGN/USDT', 'HC/USDT', 'HAM/USDT', 'AI16ZELIZA/USDT']...
+2024-12-16 01:19:01,706 - WARNING - Symbol USDT/USDT not supported by exchange. Skipping.
+2024-12-16 01:19:01,760 - INFO - Dynamic coin list: ['BTC/USDT', 'ETH/USDT', 'XRP/USDT', 'SOL/USDT', 'BNB/USDT', 'DOGE/USDT', 'USDC/USDT', 'ADA/USDT', 'STETH/USDT']
+2024-12-16 01:19:01,810 - INFO - Loaded existing ML model.
+2024-12-16 01:19:01,820 - INFO - Running Trading Bot for BTC/USDT...
+2024-12-16 01:19:02,085 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:02,086 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:02,089 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:02,091 - INFO - Target data type: float64
+2024-12-16 01:19:02,535 - INFO - Trained and saved ML model.
+2024-12-16 01:19:02,542 - INFO - Signal (Predicted Change): 0.9951985916175278, Current Price: 104656.23
+2024-12-16 01:19:02,543 - INFO - No actionable signal for BTC/USDT.
+2024-12-16 01:19:02,874 - INFO - Loaded existing ML model.
+2024-12-16 01:19:02,887 - INFO - Running Trading Bot for ETH/USDT...
+2024-12-16 01:19:03,270 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:03,271 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:03,281 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:03,283 - INFO - Target data type: float64
+2024-12-16 01:19:04,085 - INFO - Trained and saved ML model.
+2024-12-16 01:19:04,113 - INFO - Signal (Predicted Change): 0.9882813738307846, Current Price: 3962.06
+2024-12-16 01:19:04,116 - INFO - No open position to SELL for ETH/USDT.
+2024-12-16 01:19:04,492 - INFO - Loaded existing ML model.
+2024-12-16 01:19:04,523 - INFO - Running Trading Bot for XRP/USDT...
+2024-12-16 01:19:05,932 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:05,933 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:05,936 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:05,937 - INFO - Target data type: float64
+2024-12-16 01:19:06,531 - INFO - Trained and saved ML model.
+2024-12-16 01:19:06,555 - INFO - Signal (Predicted Change): 0.9974033374033363, Current Price: 2.457
+2024-12-16 01:19:06,572 - INFO - No actionable signal for XRP/USDT.
+2024-12-16 01:19:06,967 - INFO - Loaded existing ML model.
+2024-12-16 01:19:07,013 - INFO - Running Trading Bot for SOL/USDT...
+2024-12-16 01:19:07,360 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:07,361 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:07,366 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:07,367 - INFO - Target data type: float64
+2024-12-16 01:19:08,618 - INFO - Trained and saved ML model.
+2024-12-16 01:19:08,634 - INFO - Signal (Predicted Change): 0.9994170863229196, Current Price: 224.39
+2024-12-16 01:19:08,634 - INFO - No actionable signal for SOL/USDT.
+2024-12-16 01:19:08,979 - INFO - Loaded existing ML model.
+2024-12-16 01:19:08,986 - INFO - Running Trading Bot for BNB/USDT...
+2024-12-16 01:19:09,595 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:09,596 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:09,602 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:09,604 - INFO - Target data type: float64
+2024-12-16 01:19:10,495 - INFO - Trained and saved ML model.
+2024-12-16 01:19:10,513 - INFO - Signal (Predicted Change): 0.9966335412335406, Current Price: 721.5
+2024-12-16 01:19:10,515 - INFO - No actionable signal for BNB/USDT.
+2024-12-16 01:19:10,879 - INFO - Loaded existing ML model.
+2024-12-16 01:19:10,902 - INFO - Running Trading Bot for DOGE/USDT...
+2024-12-16 01:19:11,362 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:11,364 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:11,477 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:11,482 - INFO - Target data type: float64
+2024-12-16 01:19:12,357 - INFO - Trained and saved ML model.
+2024-12-16 01:19:12,364 - INFO - Signal (Predicted Change): 0.9973578431372548, Current Price: 0.408
+2024-12-16 01:19:12,366 - INFO - No actionable signal for DOGE/USDT.
+2024-12-16 01:19:12,776 - INFO - Loaded existing ML model.
+2024-12-16 01:19:12,828 - INFO - Running Trading Bot for USDC/USDT...
+2024-12-16 01:19:13,540 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:13,578 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:13,737 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:13,903 - INFO - Target data type: float64
+2024-12-16 01:19:15,460 - INFO - Trained and saved ML model.
+2024-12-16 01:19:15,530 - INFO - Signal (Predicted Change): 1.0, Current Price: 1.0
+2024-12-16 01:19:15,562 - INFO - No actionable signal for USDC/USDT.
+2024-12-16 01:19:16,090 - INFO - Loaded existing ML model.
+2024-12-16 01:19:16,119 - INFO - Running Trading Bot for ADA/USDT...
+2024-12-16 01:19:17,602 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:17,603 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:17,608 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:17,609 - INFO - Target data type: float64
+2024-12-16 01:19:18,354 - INFO - Trained and saved ML model.
+2024-12-16 01:19:18,371 - INFO - Signal (Predicted Change): 0.9931050228310498, Current Price: 1.095
+2024-12-16 01:19:18,375 - INFO - No open position to SELL for ADA/USDT.
+2024-12-16 01:19:18,750 - INFO - Loaded existing ML model.
+2024-12-16 01:19:18,794 - INFO - Running Trading Bot for STETH/USDT...
+2024-12-16 01:19:19,202 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:19,353 - INFO - Retraining the ML model as per configuration.
+2024-12-16 01:19:19,540 - INFO - Features data types:
+SMA_10         float64
+EMA_5          float64
+RSI            float64
+MACD           float64
+MACD_signal    float64
+BB_high        float64
+BB_low         float64
+StochRSI       float64
+dtype: object
+2024-12-16 01:19:19,764 - INFO - Target data type: float64
+2024-12-16 01:19:20,906 - INFO - Trained and saved ML model.
+2024-12-16 01:19:20,925 - INFO - Signal (Predicted Change): 0.9898189746867743, Current Price: 3958.01
+2024-12-16 01:19:20,935 - INFO - No open position to SELL for STETH/USDT.
+2024-12-16 01:19:21,201 - INFO - Crypto Bot execution completed for this cycle.
+2024-12-16 01:19:21,202 - INFO - Sleeping for 60 seconds before next cycle.
+2024-12-16 01:24:33,342 - INFO - Crypto AI Program started.
+2024-12-16 01:24:33,346 - INFO - Starting the Crypto Bot Execution.
+2024-12-16 01:24:33,350 - INFO - Crawling website: Coindesk
+2024-12-16 01:24:34,503 - INFO - Crawling website: CoinMarketCap
+2024-12-16 01:24:41,171 - INFO - Fetched 3694 supported symbols.
+2024-12-16 01:24:41,173 - INFO - Sample supported symbols: ['TRUMP1/USDT', 'BDC/USDT', 'AES/USDT', 'NCDT/USDT', 'ALEPH/USDT', 'ORNJ/USDT', 'OGN/USDT', 'HC/USDT', 'HAM/USDT', 'AI16ZELIZA/USDT']...
+2024-12-16 01:24:41,423 - WARNING - Symbol USDT/USDT not supported by exchange. Skipping.
+2024-12-16 01:24:41,473 - INFO - Dynamic coin list: ['BTC/USDT', 'ETH/USDT', 'XRP/USDT', 'SOL/USDT', 'BNB/USDT', 'DOGE/USDT', 'USDC/USDT', 'ADA/USDT', 'STETH/USDT']
+2024-12-16 01:24:41,524 - INFO - Loaded existing ML model.
+2024-12-16 01:24:41,525 - ERROR - Error running TradingBot for BTC/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:41,579 - INFO - Loaded existing ML model.
+2024-12-16 01:24:41,580 - ERROR - Error running TradingBot for ETH/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:41,627 - INFO - Loaded existing ML model.
+2024-12-16 01:24:41,629 - ERROR - Error running TradingBot for XRP/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:41,733 - INFO - Loaded existing ML model.
+2024-12-16 01:24:41,734 - ERROR - Error running TradingBot for SOL/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:41,894 - INFO - Loaded existing ML model.
+2024-12-16 01:24:41,906 - ERROR - Error running TradingBot for BNB/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:42,040 - INFO - Loaded existing ML model.
+2024-12-16 01:24:42,041 - ERROR - Error running TradingBot for DOGE/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:42,184 - INFO - Loaded existing ML model.
+2024-12-16 01:24:42,185 - ERROR - Error running TradingBot for USDC/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:42,275 - INFO - Loaded existing ML model.
+2024-12-16 01:24:42,278 - ERROR - Error running TradingBot for ADA/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:42,445 - INFO - Loaded existing ML model.
+2024-12-16 01:24:42,446 - ERROR - Error running TradingBot for STETH/USDT: 'api'
+Traceback (most recent call last):
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 875, in main_execution
+    bot = TradingBot(bot_config)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\CryptoAI\crypto_bot.py", line 517, in __init__
+    data_source=config['api']['data_source'],
+                ~~~~~~^^^^^^^
+KeyError: 'api'
+2024-12-16 01:24:42,450 - INFO - Crypto Bot execution completed for this cycle.
+2024-12-16 01:24:42,451 - INFO - Sleeping for 60 seconds before next cycle.

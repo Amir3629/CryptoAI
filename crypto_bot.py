@@ -18,12 +18,13 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 from sklearn.exceptions import NotFittedError
+from sklearn.ensemble import RandomForestRegressor
 import ta
 import ccxt.async_support as ccxt  # Asynchronous version of CCXT
+from logging.handlers import RotatingFileHandler
 
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
-
 
 # ----------------------------------------
 # Load Environment Variables
@@ -43,7 +44,7 @@ def load_config():
             config = yaml.safe_load(f)
 
     # If local config is enabled and exists, override main config
-    if config.get('settings', {}).get('use_local_config', False):
+    if config.get('trading', {}).get('use_local_config', False):
         if os.path.exists('config.local.yaml'):
             with open('config.local.yaml', 'r') as f:
                 local_config = yaml.safe_load(f)
@@ -109,10 +110,12 @@ MEXC_API_SECRET = os.getenv("MEXC_API_SECRET")
 COINS = get_config_value("trading.coins", ["BTC", "ETH", "BNB"])
 USE_DYNAMIC_COINS = get_config_value("trading.dynamic_coins", True)
 BASE_SYMBOL = get_config_value("trading.base_symbol", "USDT")
-BUY_THRESHOLD = get_config_value("trading.buy_threshold", 1.005)
-SELL_THRESHOLD = get_config_value("trading.sell_threshold", 0.995)
-TRADE_AMOUNT = get_config_value("trading.trade_amount", 0.001)
+BUY_THRESHOLD = get_config_value("trading.buy_threshold", 1.002)
+SELL_THRESHOLD = get_config_value("trading.sell_threshold", 0.998)
+TRADE_AMOUNT = get_config_value("trading.trade_amount", 1000)  # USD
 MAX_DAILY_TRADES = get_config_value("trading.max_daily_trades", 10)
+TIMEFRAME = get_config_value("trading.timeframe", "1H")
+LOOKBACK = get_config_value("trading.lookback", 500)
 
 TEST_SIZE = get_config_value("model.test_size", 0.2)
 PARAM_GRID = get_config_value("model.param_grid", {
@@ -122,32 +125,34 @@ PARAM_GRID = get_config_value("model.param_grid", {
     'min_samples_leaf': [1, 2, 4]
 })
 RETRAIN_MODEL = get_config_value("model.retrain", True)  # Set to True to train the model
+MODEL_PATH = get_config_value("model.model_path", "models/trading_model.pkl")
 
 LOOP_INTERVAL = get_config_value("execution.loop_interval", 60)
 
 PRIMARY_DB = get_config_value("database.primary", "postgresql")
 SECONDARY_DB = get_config_value("database.secondary", "mysql")
 
+CRAWLING_ENABLED = get_config_value("crawling.enabled", False)
+CRAWLING_WEBSITES = config.get('crawling', {}).get('websites', [])
+
 # Logging Setup
-log_file = get_config_value("logging.file", "logs/crypto_ai.log")
-log_level = get_config_value("logging.level", "INFO").upper()
+LOG_FILE = get_config_value("logging.file", "logs/crypto_ai.log")
+LOG_LEVEL = get_config_value("logging.level", "INFO").upper()
 
 # Ensure log directory exists
-log_dir = os.path.dirname(log_file)
-if not os.path.exists(log_dir):
-    os.makedirs(log_dir)
+LOG_DIR = os.path.dirname(LOG_FILE)
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
 
 # Define logging format
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
 # Create logger
 logger = logging.getLogger()
-logger.setLevel(getattr(logging, log_level, logging.INFO))
+logger.setLevel(getattr(logging, LOG_LEVEL, logging.INFO))
 
 # File handler with log rotation
-from logging.handlers import RotatingFileHandler
-
-file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5)  # 10MB per file, keep 5 backups
+file_handler = RotatingFileHandler(LOG_FILE, maxBytes=10*1024*1024, backupCount=5)  # 10MB per file, keep 5 backups
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
@@ -219,11 +224,10 @@ async def fetch_additional_data():
     """
     Fetch additional data from multiple websites as configured.
     """
-    websites = config.get('crawling', {}).get('websites', [])
     all_news = []
     all_data = []
 
-    for site in websites:
+    for site in CRAWLING_WEBSITES:
         name = site.get('name')
         url = site.get('url')
         parse_function_name = site.get('parse_function')
@@ -260,7 +264,6 @@ async def fetch_additional_data():
         data_file = os.path.join('data', 'crypto_additional_data.csv')
         data_df.to_csv(data_file, index=False)
         logging.info(f"Saved additional data to {data_file}")
-
 
 # ----------------------------------------
 # Risk Management
@@ -307,7 +310,6 @@ class RiskManager:
         """
         return entry_price * (1 + self.take_profit_pct / 100)
 
-
 # ----------------------------------------
 # Machine Learning Model
 # ----------------------------------------
@@ -341,7 +343,6 @@ class TradingModel:
         if not self.model_fit:
             raise NotFittedError("This RandomForestRegressor instance is not fitted yet.")
         return self.model.predict(X)
-
 
 # ----------------------------------------
 # Data Source Interaction
@@ -476,6 +477,23 @@ class DataSource:
             logging.error(f"Exception fetching data from CoinGecko: {e}", exc_info=True)
             return None
 
+# ----------------------------------------
+# Risk Management
+# ----------------------------------------
+
+# (Already defined above)
+
+# ----------------------------------------
+# Machine Learning Model
+# ----------------------------------------
+
+# (Already defined above)
+
+# ----------------------------------------
+# Data Source Interaction
+# ----------------------------------------
+
+# (Already defined above)
 
 # ----------------------------------------
 # Trading Bot
@@ -493,7 +511,7 @@ class TradingBot:
         )
         self.model = TradingModel(config['model'].get('model_path', 'models/trading_model.pkl'))
         self.position = None  # To track current position
-        self.balance = 10000  # Starting with a simulated balance of $10,000
+        self.balance = config['trading']['trade_amount']  # Starting balance based on trade_amount
 
         self.data_source = DataSource(
             data_source=config['api']['data_source'],
@@ -532,7 +550,7 @@ class TradingBot:
             if X.empty or y.empty:
                 logging.error("Insufficient data for training.")
                 return
-            # Corrected dtype checking
+            # Ensure all features are numeric
             if not all([np.issubdtype(dtype, np.number) for dtype in X.dtypes]):
                 logging.error("Non-numeric features detected. Please check feature engineering.")
                 return
@@ -550,12 +568,13 @@ class TradingBot:
         try:
             features = ['SMA_10', 'EMA_5', 'RSI', 'MACD', 'MACD_signal', 'BB_high', 'BB_low', 'StochRSI']
             predicted_price = self.model.predict(latest_data[features])[0]
+            logging.debug(f"Predicted Price: {predicted_price}")
         except Exception as e:
             logging.error(f"Error during prediction: {e}", exc_info=True)
             return 1  # Neutral signal
-
         current_price = df['close'].iloc[-1]
         predicted_change = predicted_price / current_price
+        logging.debug(f"Predicted Change: {predicted_change}, Current Price: {current_price}")
         return predicted_change
 
     async def run(self):
@@ -571,6 +590,7 @@ class TradingBot:
                 logging.error("No data fetched, skipping this iteration.")
                 return
 
+            df = validate_data(df)
             df = self.feature_engineering(df)
             if df is None or df.empty:
                 logging.error("Data after feature engineering is empty, skipping this iteration.")
@@ -719,7 +739,6 @@ class TradingBot:
             logging.info(f"Sold {quantity:.6f} {symbol} at {price:.2f}")
             self.position = None
 
-
 # ----------------------------------------
 # Utility Functions
 # ----------------------------------------
@@ -745,6 +764,10 @@ def add_technical_indicators(df):
         stoch = ta.momentum.StochRSIIndicator(df['close'], window=14, smooth1=3, smooth2=3)
         df['StochRSI'] = stoch.stochrsi()
         
+        # Additional indicators
+        df['ADX'] = ta.trend.ADXIndicator(df['high'], df['low'], df['close'], window=14).adx()
+        df['CCI'] = ta.trend.CCIIndicator(df['high'], df['low'], df['close'], window=20).cci()
+        
         df = df.dropna()
         return df
     except Exception as e:
@@ -755,7 +778,7 @@ def generate_features_and_target(df):
     """
     Generate features and target for model training.
     """
-    features = ['SMA_10', 'EMA_5', 'RSI', 'MACD', 'MACD_signal', 'BB_high', 'BB_low', 'StochRSI']
+    features = ['SMA_10', 'EMA_5', 'RSI', 'MACD', 'MACD_signal', 'BB_high', 'BB_low', 'StochRSI', 'ADX', 'CCI']
     X = df[features]
     y = df['close'].shift(-1).dropna()
     X = X.iloc[:-1]
@@ -766,6 +789,14 @@ def generate_features_and_target(df):
     
     return X, y
 
+def validate_data(df):
+    """
+    Validate and clean the fetched data.
+    """
+    if df.isnull().values.any():
+        logging.warning("Data contains null values. Filling missing data.")
+        df = df.fillna(method='ffill').dropna()
+    return df
 
 # ----------------------------------------
 # Database Connection and Saving
@@ -809,7 +840,6 @@ def save_to_database(data, table_name):
     except Exception as e:
         logging.error(f"Error saving to secondary DB: {e}", exc_info=True)
 
-
 # ----------------------------------------
 # Main Execution
 # ----------------------------------------
@@ -823,8 +853,7 @@ async def main_execution():
     while True:
         try:
             # Fetch additional data via web crawling
-            crawling_enabled = config.get('crawling', {}).get('enabled', False)
-            if crawling_enabled:
+            if CRAWLING_ENABLED:
                 await fetch_additional_data()
             
             # Determine actual coins to trade
@@ -917,7 +946,6 @@ async def get_supported_symbols(exchange):
     except Exception as e:
         logging.error(f"Error fetching supported symbols: {e}", exc_info=True)
         return []
-
 
 # ----------------------------------------
 # Entry Point

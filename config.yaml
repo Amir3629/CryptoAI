@@ -1,18 +1,18 @@
-settings:
-  use_local_config: false  # Set to true if you have 'config.local.yaml' for overrides
+# config.yaml
 
 trading:
-  coins: ["BTC", "ETH", "BNB"]
+  coins: ["BTC", "ETH", "XRP", "SOL", "BNB", "DOGE", "USDC", "ADA", "STETH"]
   dynamic_coins: true
-  base_symbol: "USDT"  # Ensures trading pairs like 'BTC/USDT'
-  buy_threshold: 1.005
-  sell_threshold: 0.995
-  trade_amount: 0.001
+  base_symbol: "USDT"
+  buy_threshold: 1.002  # 0.2% increase
+  sell_threshold: 0.998  # 0.2% decrease
+  trade_amount: 1000  # Max investment per trade in USD
   max_daily_trades: 10
-  timeframe: "1H"  # Timeframe for candlestick data
-  lookback: 200    # Number of data points to fetch
+  timeframe: "1H"
+  lookback: 500  # Number of data points to fetch
 
 model:
+  model_path: "models/trading_model.pkl"
   test_size: 0.2
   param_grid:
     n_estimators: [50, 100, 200]
@@ -20,28 +20,26 @@ model:
     min_samples_split: [2, 5, 10]
     min_samples_leaf: [1, 2, 4]
   retrain: true
-  model_path: "models/trading_model.pkl"
 
 execution:
-  loop_interval: 60  # Time in seconds between each bot cycle
+  loop_interval: 60  # Seconds
 
 database:
-  primary: "postgresql"  # Primary database type: "postgresql" or "mysql"
-  secondary: "mysql"     # Secondary database type
-
-logging:
-  file: "logs/crypto_ai.log"
-  level: "INFO"
-
-api:
-  data_source: "cryptocompare"  # Options: "cryptocompare", "coingecko", "simulated"
+  primary: "postgresql"  # or "mysql"
+  secondary: "mysql"  # or "postgresql"
 
 crawling:
-  enabled: false
+  enabled: true
   websites:
-    - name: "Crypto News Site"
+    - name: "Coindesk"
       url: "https://www.coindesk.com/"
       parse_function: "parse_crypto_news"
-    - name: "Crypto Data Site"
+    - name: "CoinMarketCap"
       url: "https://coinmarketcap.com/"
       parse_function: "parse_another_crypto_site"
+
+logging:
+  level: "INFO"
+  file: "logs/crypto_ai.log"
+
+# Additional configurations can be added here
