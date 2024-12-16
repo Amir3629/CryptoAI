@@ -14,6 +14,9 @@ import numpy as np
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
 from ta.volatility import TrueRangeIndicator, BollingerBands
 from ta.trend import SMAIndicator, EMAIndicator, MACD, ADXIndicator, CCIIndicator
 from ta.momentum import RSIIndicator, StochRSIIndicator
@@ -25,46 +28,23 @@ from ta.momentum import RSIIndicator, StochRSIIndicator
 load_dotenv()
 
 # ----------------------------------------
-# Configuration
+# Configuration Management
 # ----------------------------------------
 
-def load_config(local=False):
-    config_file = 'config.local.yaml' if local else 'config.yaml'
-    if not os.path.exists(config_file):
-        logging.error(f"Configuration file {config_file} not found.")
-        sys.exit(1)
-    with open(config_file, 'r') as f:
-        return yaml.safe_load(f)
+def load_config():
+    # Load configurations from config.yaml if present
+    if os.path.exists('config.yaml'):
+        with open('config.yaml', 'r') as f:
+            return yaml.safe_load(f)
+    return {}
 
 config = load_config()
 
-# ----------------------------------------
-# Logging Setup
-# ----------------------------------------
-
-LOG_LEVEL = config.get("logging", {}).get("level", "INFO").upper()
-LOG_FILE = config.get("logging", {}).get("file", "logs/crypto_ai.log")
-
-os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-
-logging.basicConfig(
-    level=LOG_LEVEL,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(LOG_FILE),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-
-# ----------------------------------------
-# Helper Functions
-# ----------------------------------------
-
-def get_config_value(key, default=None):
+def get_config_value(key_path, default=None):
     """
     Retrieve a configuration value using dot notation.
     """
-    keys = key.split('.')
+    keys = key_path.split('.')
     value = config
     try:
         for k in keys:
@@ -73,89 +53,77 @@ def get_config_value(key, default=None):
     except KeyError:
         return default
 
+# Load Environment Variables
+CRYPTOCOMPARE_API_KEY = os.getenv("CRYPTOCOMPARE_API_KEY")
+COINGECKO_API_KEY = os.getenv("COINGECKO_API_KEY")
+ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
+
+POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT")
+POSTGRES_USER = os.getenv("POSTGRES_USER")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+POSTGRES_DATABASE = os.getenv("POSTGRES_DATABASE")
+
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_PORT = os.getenv("MYSQL_PORT")
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
+
+MEXC_API_KEY = os.getenv("MEXC_API_KEY")
+MEXC_API_SECRET = os.getenv("MEXC_API_SECRET")
+
+# Configurable Parameters
+COINS = get_config_value("trading.coins", ["BTC", "ETH", "BNB"])
+USE_DYNAMIC_COINS = get_config_value("trading.dynamic_coins", True)
+BASE_SYMBOL = get_config_value("trading.base_symbol", "USDT")
+BUY_THRESHOLD = get_config_value("trading.buy_threshold", 1.005)
+SELL_THRESHOLD = get_config_value("trading.sell_threshold", 0.995)
+TRADE_AMOUNT = get_config_value("trading.trade_amount", 0.001)
+MAX_DAILY_TRADES = get_config_value("trading.max_daily_trades", 10)
+
+TEST_SIZE = get_config_value("model.test_size", 0.2)
+PARAM_GRID = get_config_value("model.param_grid", {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [None, 10, 20],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+})
+
+LOOP_INTERVAL = get_config_value("execution.loop_interval", 60)
+
+PRIMARY_DB = get_config_value("database.primary", "postgresql")
+SECONDARY_DB = get_config_value("database.secondary", "mysql")
+
 # ----------------------------------------
-# Data Fetching
+# Logging Setup
 # ----------------------------------------
 
-class DataSource:
-    def __init__(self, data_source, symbol, timeframe, lookback):
-        self.data_source = data_source
-        self.symbol = symbol
-        self.timeframe = timeframe
-        self.lookback = lookback
+LOG_FILE = config.get("logging", {}).get("file", "logs/crypto_ai.log")
+LOG_LEVEL = config.get("logging", {}).get("level", "INFO").upper()
 
-    async def get_data(self):
-        if self.data_source.lower() == 'cryptocompare':
-            return await self.fetch_from_cryptocompare()
-        elif self.data_source.lower() == 'coingecko':
-            return await self.fetch_from_coingecko()
-        elif self.data_source.lower() == 'simulated':
-            return self.generate_fake_data()
-        else:
-            logging.error(f"Unsupported data source: {self.data_source}")
-            return None
+os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
-    async def fetch_from_cryptocompare(self):
-        logging.info("Fetching data from CryptoCompare...")
-        api_key = os.getenv('CRYPTOCOMPARE_API_KEY')
-        url = f"https://min-api.cryptocompare.com/data/v2/histohour"
-        params = {
-            'fsym': self.symbol.split('/')[0],
-            'tsym': self.symbol.split('/')[1],
-            'limit': self.lookback - 1,
-            'api_key': api_key
-        }
-        try:
-            import aiohttp
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, params=params) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        if data['Response'] == 'Success':
-                            df = pd.DataFrame(data['Data']['Data'])
-                            df['time'] = pd.to_datetime(df['time'], unit='s')
-                            df.rename(columns={
-                                'time': 'timestamp',
-                                'open': 'open',
-                                'high': 'high',
-                                'low': 'low',
-                                'close': 'close',
-                                'volumefrom': 'volume'
-                            }, inplace=True)
-                            df.set_index('timestamp', inplace=True)
-                            logging.info(f"Fetched {len(df)} data points from CryptoCompare.")
-                            return df
-                        else:
-                            logging.error(f"CryptoCompare API error: {data['Message']}")
-                            return None
-                    else:
-                        error_content = await response.text()
-                        logging.error(f"Failed to fetch data from CryptoCompare: Status code {response.status}, Response: {error_content}")
-                        return None
-        except Exception as e:
-            logging.error(f"Exception fetching data from CryptoCompare: {e}", exc_info=True)
-            return None
+logging.basicConfig(
+    level=LOG_LEVEL,
+    format='%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 
-    async def fetch_from_coingecko(self):
-        logging.info("Fetching data from CoinGecko...")
-        # Implement actual data fetching from CoinGecko
-        # Placeholder implementation
-        return pd.DataFrame()  # Return empty DataFrame for placeholder
+logging.info("Crypto AI Program started.")
 
-    def generate_fake_data(self):
-        logging.info("Generating simulated data...")
-        date_range = pd.date_range(end=pd.Timestamp.now(), periods=self.lookback, freq=self.timeframe)
-        data = {
-            'timestamp': date_range,
-            'open': np.random.uniform(100, 200, size=self.lookback),
-            'high': np.random.uniform(200, 300, size=self.lookback),
-            'low': np.random.uniform(50, 100, size=self.lookback),
-            'close': np.random.uniform(100, 200, size=self.lookback),
-            'volume': np.random.uniform(1000, 5000, size=self.lookback)
-        }
-        df = pd.DataFrame(data)
-        df.set_index('timestamp', inplace=True)
-        return df
+# ----------------------------------------
+# Initialize CCXT Client
+# ----------------------------------------
+
+exchange = ccxt.mexc({
+    'apiKey': MEXC_API_KEY,
+    'secret': MEXC_API_SECRET,
+    'enableRateLimit': True,
+})
 
 # ----------------------------------------
 # Risk Manager
@@ -206,16 +174,13 @@ class TradingModel:
             self.model_fit = False
 
     def train(self, X, y):
-        from sklearn.ensemble import RandomForestRegressor
-        from sklearn.model_selection import GridSearchCV
-
         if X.empty or y.empty:
             logging.error("Cannot train ML model with empty data.")
             return
 
         try:
             rf = RandomForestRegressor(random_state=42)
-            grid = GridSearchCV(estimator=rf, param_grid=config['model'].get('param_grid', {}), cv=5, n_jobs=-1)
+            grid = GridSearchCV(estimator=rf, param_grid=PARAM_GRID, cv=5, n_jobs=-1)
             grid.fit(X, y)
             self.model = grid.best_estimator_
             self.model_fit = True
@@ -235,29 +200,111 @@ class TradingModel:
             return np.array([1])  # Neutral signal
 
 # ----------------------------------------
+# Data Fetching
+# ----------------------------------------
+
+class DataSource:
+    def __init__(self, data_source, symbol, timeframe, lookback):
+        self.data_source = data_source
+        self.symbol = symbol
+        self.timeframe = timeframe
+        self.lookback = lookback
+
+    async def get_data(self):
+        if self.data_source.lower() == 'cryptocompare':
+            return await self.fetch_from_cryptocompare()
+        elif self.data_source.lower() == 'coingecko':
+            return await self.fetch_from_coingecko()
+        elif self.data_source.lower() == 'simulated':
+            return self.generate_fake_data()
+        else:
+            logging.error(f"Unsupported data source: {self.data_source}")
+            return None
+
+    async def fetch_from_cryptocompare(self):
+        logging.info("Fetching data from CryptoCompare...")
+        url = f"https://min-api.cryptocompare.com/data/v2/histominute"
+        params = {
+            'fsym': self.symbol,
+            'tsym': BASE_SYMBOL,
+            'limit': self.lookback - 1,
+            'api_key': CRYPTOCOMPARE_API_KEY
+        }
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, params=params) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        if data['Response'] == 'Success':
+                            df = pd.DataFrame(data['Data']['Data'])
+                            df['time'] = pd.to_datetime(df['time'], unit='s')
+                            df.rename(columns={
+                                'time': 'timestamp',
+                                'open': 'open',
+                                'high': 'high',
+                                'low': 'low',
+                                'close': 'close',
+                                'volumefrom': 'volume'
+                            }, inplace=True)
+                            df.set_index('timestamp', inplace=True)
+                            logging.info(f"Fetched {len(df)} data points from CryptoCompare for {self.symbol}.")
+                            return df
+                        else:
+                            logging.error(f"CryptoCompare API error: {data['Message']}")
+                            return None
+                    else:
+                        error_content = await response.text()
+                        logging.error(f"Failed to fetch data from CryptoCompare: Status code {response.status}, Response: {error_content}")
+                        return None
+        except Exception as e:
+            logging.error(f"Exception fetching data from CryptoCompare: {e}", exc_info=True)
+            return None
+
+    async def fetch_from_coingecko(self):
+        logging.info("Fetching data from CoinGecko...")
+        # Implement actual data fetching from CoinGecko if needed
+        # Placeholder implementation
+        return pd.DataFrame()  # Return empty DataFrame for placeholder
+
+    def generate_fake_data(self):
+        logging.info("Generating simulated data...")
+        date_range = pd.date_range(end=pd.Timestamp.now(), periods=self.lookback, freq=self.timeframe)
+        data = {
+            'timestamp': date_range,
+            'open': np.random.uniform(100, 200, size=self.lookback),
+            'high': np.random.uniform(200, 300, size=self.lookback),
+            'low': np.random.uniform(50, 100, size=self.lookback),
+            'close': np.random.uniform(100, 200, size=self.lookback),
+            'volume': np.random.uniform(1000, 5000, size=self.lookback)
+        }
+        df = pd.DataFrame(data)
+        df.set_index('timestamp', inplace=True)
+        return df
+
+# ----------------------------------------
 # Trading Bot
 # ----------------------------------------
 
 class TradingBot:
     def __init__(self, config, symbol):
         self.symbol = symbol
-        self.timeframe = config['trading'].get('timeframe', '1H')
-        self.lookback = config['trading'].get('lookback', 200)
-        self.buy_threshold = config['trading'].get('buy_threshold', 1.002)
-        self.sell_threshold = config['trading'].get('sell_threshold', 0.998)
-        self.max_daily_trades = config['trading'].get('max_daily_trades', 10)
+        self.timeframe = config.get("trading", {}).get("timeframe", '1T')  # 1T = 1 minute
+        self.lookback = config.get("trading", {}).get("lookback", 200)
+        self.buy_threshold = BUY_THRESHOLD
+        self.sell_threshold = SELL_THRESHOLD
+        self.max_daily_trades = MAX_DAILY_TRADES
 
         self.risk_manager = RiskManager(
-            max_investment=config['trading'].get('trade_amount', 1000),
-            stop_loss_pct=5,  # Example: 5%
-            take_profit_pct=10  # Example: 10%
+            max_investment=TRADE_AMOUNT,
+            stop_loss_pct=5,  # 5%
+            take_profit_pct=10  # 10%
         )
-        self.model = TradingModel(config['model'].get('model_path', 'models/trading_model.pkl'))
+        self.model = TradingModel(config.get("model", {}).get("model_path", 'models/trading_model.pkl'))
         self.position = None  # To track current position
-        self.balance = config['trading'].get('trade_amount', 1000)  # Starting balance based on trade_amount
+        self.balance = TRADE_AMOUNT  # Starting balance based on trade_amount
 
         self.data_source = DataSource(
-            data_source=config['api'].get('data_source', 'simulated'),
+            data_source=config.get("api", {}).get("data_source", 'cryptocompare'),
             symbol=self.symbol,
             timeframe=self.timeframe,
             lookback=self.lookback
@@ -265,8 +312,8 @@ class TradingBot:
 
         # Initialize exchange within the TradingBot
         self.exchange = ccxt.mexc({
-            'apiKey': os.getenv('MEXC_API_KEY'),
-            'secret': os.getenv('MEXC_API_SECRET'),
+            'apiKey': MEXC_API_KEY,
+            'secret': MEXC_API_SECRET,
             'enableRateLimit': True,
         })
 
@@ -297,15 +344,19 @@ class TradingBot:
         """
         Create features for the ML model.
         """
-        df = add_technical_indicators(df)
-        return df
+        try:
+            df = add_technical_indicators(df)
+            return df
+        except Exception as e:
+            logging.error(f"Error during feature engineering: {e}", exc_info=True)
+            return None
 
     def train_model_if_needed(self, df):
         """
-        Train the ML model if retrain is set to True and interval met.
+        Train the ML model if not already trained.
         """
-        if config['model'].get('retrain', True):
-            logging.info("Retraining the ML model as per configuration.")
+        if not self.model.model_fit:
+            logging.info("Training the ML model as it is not trained yet.")
             X, y = generate_features_and_target(df)
             if X.empty or y.empty:
                 logging.error("Insufficient data for training.")
@@ -512,7 +563,7 @@ class TradingBot:
 
 def add_technical_indicators(df):
     """
-    Add technical indicators to the dataframe using class-based indicators.
+    Add technical indicators to the dataframe using the ta library.
     Includes detailed debugging logs.
     """
     try:
@@ -621,15 +672,15 @@ def validate_data(df):
 
 def connect_database(primary=True):
     if primary:
-        if config['database']['primary'].lower() == 'postgresql':
-            db_url = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DATABASE')}"
+        if PRIMARY_DB.lower() == 'postgresql':
+            db_url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}"
         else:
-            db_url = f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}@{os.getenv('MYSQL_HOST')}:{os.getenv('MYSQL_PORT')}/{os.getenv('MYSQL_DATABASE')}"
+            db_url = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}"
     else:
-        if config['database']['secondary'].lower() == 'mysql':
-            db_url = f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}@{os.getenv('MYSQL_HOST')}:{os.getenv('MYSQL_PORT')}/{os.getenv('MYSQL_DATABASE')}"
+        if SECONDARY_DB.lower() == 'mysql':
+            db_url = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}"
         else:
-            db_url = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DATABASE')}"
+            db_url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}"
     
     engine = create_engine(db_url, pool_pre_ping=True)
     return engine
@@ -641,24 +692,24 @@ def save_to_database(data, table_name):
         try:
             engine = connect_database(primary=True)
             data.to_sql(table_name, engine, if_exists='replace', index=False)
-            logging.info(f"Data saved to {config['database']['primary'].upper()} table: {table_name}")
+            logging.info(f"Data saved to {PRIMARY_DB.upper()} table: {table_name}")
             return
         except OperationalError as e:
             logging.error(f"Primary DB error: {e}, retrying...")
             attempts += 1
             time.sleep(3)
-
+    
     # If primary fails, try secondary
     logging.warning("Primary DB failed, trying secondary database.")
     try:
         engine = connect_database(primary=False)
         data.to_sql(table_name, engine, if_exists='replace', index=False)
-        logging.info(f"Data saved to {config['database']['secondary'].upper()} table: {table_name}")
+        logging.info(f"Data saved to {SECONDARY_DB.upper()} table: {table_name}")
     except Exception as e:
         logging.error(f"Error saving to secondary DB: {e}", exc_info=True)
 
 # ----------------------------------------
-# Main Execution
+# Main Execution Loop
 # ----------------------------------------
 
 async def main_execution():
@@ -669,19 +720,16 @@ async def main_execution():
 
     while True:
         try:
-            # Fetch additional data via web crawling
-            if config['crawling']['enabled']:
-                await fetch_additional_data()
-
             # Determine actual coins to trade
-            actual_coins = config['trading']['coins']
-            if config['trading'].get('dynamic_coins', False):
+            actual_coins = COINS
+            if USE_DYNAMIC_COINS and COINGECKO_API_KEY:
                 actual_coins = await fetch_top_coins()
                 logging.info(f"Dynamic coin list: {actual_coins}")
-
+            else:
+                logging.info(f"Using predefined coin list: {actual_coins}")
         except Exception as e:
-            logging.error(f"Error fetching additional data: {e}", exc_info=True)
-            actual_coins = config['trading']['coins']  # Fallback to predefined coins
+            logging.error(f"Error fetching dynamic coins: {e}", exc_info=True)
+            actual_coins = COINS  # Fallback to predefined coins
 
         daily_trades = 0
         for symbol in actual_coins:
@@ -693,7 +741,7 @@ async def main_execution():
 
                 if bot.position:
                     daily_trades += 1
-                    if daily_trades >= config['trading']['max_daily_trades']:
+                    if daily_trades >= MAX_DAILY_TRADES:
                         logging.warning("Max daily trades limit reached. No more trades will be made today.")
                         break
             except Exception as e:
@@ -702,25 +750,13 @@ async def main_execution():
         logging.info("Crypto Bot execution completed for this cycle.")
 
         # Wait for the next cycle
-        loop_interval = get_config_value("execution.loop_interval", 60)
-        logging.info(f"Sleeping for {loop_interval} seconds before next cycle.")
-        await asyncio.sleep(loop_interval)
-
-async def fetch_additional_data():
-    """
-    Placeholder for web crawling functions.
-    Implement actual web crawling as needed.
-    """
-    logging.info("Fetching additional data via web crawling...")
-    # Implement your web crawling logic here
-    await asyncio.sleep(1)  # Placeholder
+        logging.info(f"Sleeping for {LOOP_INTERVAL} seconds before next cycle.")
+        await asyncio.sleep(LOOP_INTERVAL)
 
 async def fetch_top_coins(limit=10):
     """
     Fetch top coins by market capitalization using CoinGecko API.
     """
-    import aiohttp
-
     url = "https://api.coingecko.com/api/v3/coins/markets"
     params = {
         'vs_currency': 'usd',
@@ -737,8 +773,8 @@ async def fetch_top_coins(limit=10):
                     coins = [coin['symbol'].upper() for coin in data]
                     # Initialize a temporary exchange to get supported symbols
                     temp_exchange = ccxt.mexc({
-                        'apiKey': os.getenv('MEXC_API_KEY'),
-                        'secret': os.getenv('MEXC_API_SECRET'),
+                        'apiKey': MEXC_API_KEY,
+                        'secret': MEXC_API_SECRET,
                         'enableRateLimit': True,
                     })
                     await temp_exchange.load_markets()
@@ -755,10 +791,10 @@ async def fetch_top_coins(limit=10):
                 else:
                     error_content = await response.text()
                     logging.error(f"Failed to fetch top coins: Status code {response.status}, Response: {error_content}")
-                    return config['trading']['coins']  # Fallback to predefined coins
+                    return COINS  # Fallback to predefined coins
     except Exception as e:
         logging.error(f"Exception fetching top coins: {e}", exc_info=True)
-        return config['trading']['coins']  # Fallback to predefined coins
+        return COINS  # Fallback to predefined coins
 
 # ----------------------------------------
 # Entry Point
