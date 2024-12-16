@@ -2,15 +2,11 @@
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 
-# Virtual Environment
-venv/
-ENV/
-env/
-.venv/
+# Environment Variables
+.env
 
 # Logs
 logs/
@@ -20,20 +16,20 @@ logs/
 data/
 *.csv
 
-# ML Models
+# Models
 models/
 *.pkl
 
-# Environment Variables
-.env
-config.local.yaml
+# Positions
+positions/
+*.json
 
-# Editors and OS
+# IDEs and Editors
 .vscode/
 .idea/
-.DS_Store
-Thumbs.db
+*.sublime-project
+*.sublime-workspace
 
 # Others
-*.db
-*.sqlite3
+.DS_Store
+Thumbs.db

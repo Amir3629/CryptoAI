@@ -1,45 +1,37 @@
 # config.yaml
 
-trading:
-  coins: ["BTC", "ETH", "XRP", "SOL", "BNB", "DOGE", "USDC", "ADA", "STETH"]
-  dynamic_coins: true
-  base_symbol: "USDT"
-  buy_threshold: 1.002  # 0.2% increase
-  sell_threshold: 0.998  # 0.2% decrease
-  trade_amount: 1000  # Max investment per trade in USD
-  max_daily_trades: 10
-  timeframe: "1H"
-  lookback: 500  # Number of data points to fetch
-
-model:
-  model_path: "models/trading_model.pkl"
-  test_size: 0.2
-  param_grid:
-    n_estimators: [50, 100, 200]
-    max_depth: [None, 10, 20]
-    min_samples_split: [2, 5, 10]
-    min_samples_leaf: [1, 2, 4]
-  retrain: true
-
-execution:
-  loop_interval: 60  # Seconds
+logging:
+  level: INFO
+  file: logs/crypto_ai.log
 
 database:
-  primary: "postgresql"  # or "mysql"
-  secondary: "mysql"  # or "postgresql"
+  primary: postgresql  # or mysql
+  secondary: mysql      # or postgresql
+  # Add other database configurations as needed
+
+api:
+  data_source: cryptocompare  # or coingecko, simulated
+
+trading:
+  coins:
+    - BTC/USDT
+    - ETH/USDT
+    # Add other trading pairs as needed
+  trade_amount: 1000
+  timeframe: '1H'
+  lookback: 200
+  buy_threshold: 1.002
+  sell_threshold: 0.998
+  max_daily_trades: 10
+  dynamic_coins: false
+
+model:
+  model_path: models/trading_model.pkl
+  retrain: true
+  param_grid:
+    n_estimators: [100, 200]
+    max_depth: [10, 20]
+    # Add other hyperparameters as needed
 
 crawling:
-  enabled: true
-  websites:
-    - name: "Coindesk"
-      url: "https://www.coindesk.com/"
-      parse_function: "parse_crypto_news"
-    - name: "CoinMarketCap"
-      url: "https://coinmarketcap.com/"
-      parse_function: "parse_another_crypto_site"
-
-logging:
-  level: "INFO"
-  file: "logs/crypto_ai.log"
-
-# Additional configurations can be added here
+  enabled: false
