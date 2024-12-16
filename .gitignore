@@ -1,9 +1,8 @@
 # .gitignore
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
+# Virtual Environment
+venv/
+CryptoAI_env/
 
 # Environment Variables
 .env
@@ -12,24 +11,15 @@ __pycache__/
 logs/
 *.log
 
-# Data Files
-data/
-*.csv
+# Database Files
+*.db
 
-# Models
-models/
-*.pkl
+# Python Bytecode
+__pycache__/
+*.pyc
 
-# Positions
-positions/
-*.json
-
-# IDEs and Editors
+# IDE Files
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
-
-# Others
-.DS_Store
-Thumbs.db
