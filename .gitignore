@@ -1,9 +1,39 @@
-.env
-venv/
+# .gitignore
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+
+# Logs
+logs/
+*.log
+
+# Data Files
+data/
+*.csv
+
+# ML Models
+models/
+*.pkl
+
+# Environment Variables
+.env
+config.local.yaml
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Others
 *.db
 *.sqlite3
-*.log
