@@ -74,7 +74,7 @@ MEXC_API_KEY = os.getenv("MEXC_API_KEY")
 MEXC_API_SECRET = os.getenv("MEXC_API_SECRET")
 
 # Configurable Parameters
-COINS = get_config_value("trading.coins", ["BTC", "ETH", "BNB"])
+COINS = get_config_value("trading.coins", ["BTC/USDT", "ETH/USDT", "BNB/USDT"])
 USE_DYNAMIC_COINS = get_config_value("trading.dynamic_coins", True)
 BASE_SYMBOL = get_config_value("trading.base_symbol", "USDT")
 BUY_THRESHOLD = get_config_value("trading.buy_threshold", 1.005)
@@ -225,8 +225,8 @@ class DataSource:
         logging.info("Fetching data from CryptoCompare...")
         url = f"https://min-api.cryptocompare.com/data/v2/histominute"
         params = {
-            'fsym': self.symbol,
-            'tsym': BASE_SYMBOL,
+            'fsym': self.symbol.split('/')[0],
+            'tsym': self.symbol.split('/')[1],
             'limit': self.lookback - 1,
             'api_key': CRYPTOCOMPARE_API_KEY
         }

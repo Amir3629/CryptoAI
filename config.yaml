@@ -1,8 +1,8 @@
 trading:
   coins:
-    - BTC
-    - ETH
-    - BNB
+    - BTC/USDT
+    - ETH/USDT
+    - BNB/USDT
   dynamic_coins: true
   base_symbol: USDT
   buy_threshold: 1.005
