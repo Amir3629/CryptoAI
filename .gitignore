@@ -1,3 +1,5 @@
+# .gitignore
+
 venv/
 __pycache__/
 *.pyc
@@ -8,3 +10,24 @@ __pycache__/
 *.DS_Store
 *.log
 *.sqlite3
+.env
+Dockerfile
+Dockerfiles/
+APIKeyManager/
+AlertNotificationSystem/
+AutomatedRestartSystem/
+BackupRecoveryManager/
+ComplianceReportingManager/
+ConfigRepo/
+ConfigurationManager/
+ContinuousImprovementModule/
+DataIntegrityValidationManager/
+IssueResolutionEngine/
+PerformanceMonitor/
+RiskManagementAdvisor/
+SecurityAuditor/
+SentimentNewsIntegrator/
+logs/
+models/
+positions/
+data/
