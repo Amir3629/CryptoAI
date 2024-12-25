@@ -1,33 +1,95 @@
+# config.yaml
+
+# ----------------------------------------
+# Trading Configuration
+# ----------------------------------------
 trading:
-  coins:
-    - BTC/USDT
-    - ETH/USDT
-    - BNB/USDT
-  dynamic_coins: true
-  base_symbol: USDT
+  # List of base cryptocurrency symbols to trade (without the base currency, e.g., "BTC" instead of "BTC/USDT")
+  coins: ["BTC", "ETH", "SOL", "DOGE", "ADA"]
+  
+  # If set to true, the bot will dynamically fetch the top coins by market cap
+  dynamic_coins: false
+  
+  # The base currency symbol for trading pairs
+  base_symbol: "USDT"
+  
+  # Threshold for buying: e.g., 1.005 means a predicted 0.5% increase to trigger a buy
   buy_threshold: 1.005
+  
+  # Threshold for selling: e.g., 0.995 means a predicted 0.5% decrease to trigger a sell
   sell_threshold: 0.995
-  trade_amount: 0.001
+  
+  # Amount in base currency (e.g., USDT) to trade per order
+  trade_amount: 500
+  
+  # Maximum number of trades allowed per day
   max_daily_trades: 10
-  timeframe: '1T'  # 1T = 1 Minute
+  
+  # Maximum allowable loss per day in base currency (e.g., USDT)
+  max_daily_loss: 500
+  
+  # Timeframe for candlestick data (e.g., "1m" for 1 minute)
+  timeframe: "1m"
+  
+  # Number of past candlesticks to fetch for analysis
   lookback: 200
+  
+  # Data source type: "real" for live data, "simulated" for backtesting or simulation
+  data_source: "real"
+  
+  # If set to true, the bot will simulate trades without executing them on the exchange
+  dry_run: false
 
+# ----------------------------------------
+# Model Configuration
+# ----------------------------------------
 model:
-  test_size: 0.2
-  param_grid:
-    n_estimators: [50, 100, 200]
-    max_depth: [None, 10, 20]
-    min_samples_split: [2, 5, 10]
-    min_samples_leaf: [1, 2, 4]
-  model_path: 'models/trading_model.pkl'
+  # If set to true, the ML models will be retrained periodically
+  retrain: true
+  
+  # File path to save/load the trained Gradient Boosting model
+  model_path: "models/trading_model.pkl"
+  
+  # File path to save/load the trained LSTM model
+  lstm_model_path: "models/lstm_trading_model.h5"
 
+# ----------------------------------------
+# Execution Configuration
+# ----------------------------------------
 execution:
-  loop_interval: 60  # In seconds
+  # Interval in seconds between each trading loop iteration
+  loop_interval: 30
 
-database:
-  primary: 'postgresql'
-  secondary: 'mysql'
-
+# ----------------------------------------
+# Logging Configuration
+# ----------------------------------------
 logging:
-  file: 'logs/crypto_ai.log'
-  level: 'INFO'
+  # File path to store log files
+  file: "logs/crypto_ai.log"
+  
+  # Logging level (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  level: "DEBUG"
+
+# ----------------------------------------
+# Database Configuration
+# ----------------------------------------
+database:
+  # Primary database type: "postgresql" or "mysql"
+  primary: "postgresql"
+  
+  # Secondary database type: "mysql" or "postgresql"
+  secondary: "mysql"
+
+# ----------------------------------------
+# Additional Configuration (Optional)
+# ----------------------------------------
+# You can add more sections here as needed, such as API rate limits, strategy parameters, etc.
+# Ensure that any new parameters are correctly referenced in your Python script.
+
+# Example:
+# strategy:
+#   ma_short_window: 10
+#   ma_long_window: 50
+#   rsi_window: 14
+#   ema_short_window: 20
+#   ema_long_window: 50

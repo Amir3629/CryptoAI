@@ -1,5 +1,3 @@
-# test_yaml.py
-
 import yaml
 
 sample_yaml = """

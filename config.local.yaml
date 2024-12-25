@@ -1,9 +1,11 @@
 # config.local.yaml
 
+# Example of overriding trading settings
 trading:
-  trade_amount: 500  # Override trade amount to $500
-  buy_threshold: 1.005  # Change buy threshold to 0.5% increase
-  sell_threshold: 0.995  # Change sell threshold to 0.5% decrease
+  dry_run: false  # Set to false for real trading
+  trade_amount: 1000  # Adjust trade amount as needed
 
-api:
-  data_source: "simulated"  # Use simulated data for testing
+# Example of overriding model paths
+model:
+  model_path: "models/local_trading_model.pkl"
+  lstm_model_path: "models/local_lstm_trading_model.h5"

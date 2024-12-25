@@ -1,25 +1,10 @@
-# .gitignore
-
-# Virtual Environment
 venv/
-CryptoAI_env/
-
-# Environment Variables
-.env
-
-# Logs
-logs/
-*.log
-
-# Database Files
-*.db
-
-# Python Bytecode
 __pycache__/
 *.pyc
-
-# IDE Files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.DS_Store
+*.log
+*.sqlite3

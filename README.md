@@ -1,17 +1,31 @@
 # CryptoAI Trading Bot
- 
+
 ## Overview
-CryptoAI is a cryptocurrency trading bot that uses machine learning to make trading decisions based on market data and technical indicators.
- 
+
+CryptoAI is a comprehensive cryptocurrency trading bot that leverages machine learning models and sentiment analysis to execute trades automatically. It integrates with multiple services and uses the ELK Stack for centralized logging and monitoring.
+
 ## Features
-- Fetches real-time market data from CryptoCompare and CoinGecko.
-- Utilizes technical indicators like SMA, EMA, RSI, MACD, Bollinger Bands, and StochRSI.
-- Implements a machine learning model (Random Forest Regressor) for price prediction.
-- Places buy/sell orders on the MEXC exchange based on signals.
-- Comprehensive logging and error handling.
- 
-## Setup Instructions
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/yourusername/CryptoAI.git
-   cd CryptoAI
+
+- **Automated Trading:** Executes buy and sell orders based on ML predictions.
+- **Machine Learning Models:** Utilizes Gradient Boosting and LSTM models for price prediction.
+- **Sentiment Analysis:** Analyzes market sentiment to inform trading decisions.
+- **Risk Management:** Implements risk controls like maximum daily trades and loss limits.
+- **Centralized Logging:** Uses ELK Stack (Elasticsearch, Logstash, Kibana) for log aggregation and visualization.
+- **Notifications:** Sends alerts via Telegram and Email for key events.
+
+## Prerequisites
+
+- **Python 3.8 or higher**
+- **Docker Desktop** (for running ELK Stack and other services)
+- **Virtual Environment** (`venv` recommended)
+- **API Keys** for exchanges (e.g., KuCoin, MEXC)
+- **Telegram Bot Token** and **Chat ID**
+- **Email Credentials** for notifications
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/CryptoAI.git
+cd CryptoAI
